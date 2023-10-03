@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>TODOAPP</title>
+  <style>
+    #id_task {
+      width: 30%;
+      padding: 10px;
+      margin-left: 70%;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 align="center">TodoApp</h1>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <div id="tsk">
+      {{form.task}}
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" data-dismiss="modal">Add</button>
+    </div>
+  </form>
+
+
+  <div>
+    <table border="1" class="table">
+      <tr>
+        <th>Task</th>
+        <th>Action</th>
+        <th>edit</th>
+        <th>delete</th>
+      </tr>
+
+      {% for i in data %}
+
+      <tr>
+        {% if i.complete is True %}
+
+        <td align="center" id="val"><b><strike>{{i.task}}</strike></b></td>
+        <td align="center"><a href="/comp/{{i.id}}?complete=false"><button class="btn btn-lg btn-success" id="cr">UnCross</button></a></td>
+        <td align="center"><a href="/edi/{{i.id}}"><button class="btn btn-lg btn-warning">Edit</button></a></td>
+        <td align="center"><a href="/dele/{{i.id}}"><button class="btn btn-lg btn-danger">Delete</button></a></td>
+
+        {% else %}
+        <td align="center" id="val"><b>{{i.task}}</b></td>
+        <td align="center"><a href="/comp/{{i.id}}?complete=true"><button class="btn btn-lg btn-success" id="cr">Cross</button></a></td>
+        <td align="center"><a href="/edi/{{i.id}}"><button class="btn btn-lg btn-warning">Edit</button></a></td>
+        <td align="center"><a href="/dele/{{i.id}}"><button class="btn btn-lg btn-danger">Delete</button></a></td>
+
+        {% endif %}
+      
+      {% endfor %}
+    </table>
+  </div>
+
+
+
+  <script>
+
+
+    // function croos() {
+    //  var valu=document.getElementById("val").value;
+
+    //   console.log(valu)
+    //   alert('value is: ', valu)
+    // }
+
+
+
+
+
+// $(document).ready(function(){
+//   $("#cr").click(function(){
+//     $("#val").html("<strike>a</strike>");
+//   });
+// });
+
+  </script>
+
+</body>
+
+</html>
